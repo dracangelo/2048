@@ -15,3 +15,12 @@ def add_new_tile(board):
     if empty_tiles:
         i, j = random.choice(empty_tiles)
         board[i][j] = random.choice(NEW_TILE)
+
+def print_board(board):
+    os.system('clear' if os.name == 'posix' else 'cls')
+    for row in board:
+        print("\t".join([str(num) if num != 0 else '.' for num in row]))
+    print("\n")
+
+def rotate_board(board):
+    return [list(row) for row in zip(*board[::-1])]
