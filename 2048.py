@@ -9,3 +9,9 @@ def init_board():
     add_new_tile(board)
     add_new_tile(board)
     return board
+
+def add_new_tile(board):
+    empty_tiles = [(i, j) for i in range(SIZE) for j in range(SIZE) if board[i][j] == 0]
+    if empty_tiles:
+        i, j = random.choice(empty_tiles)
+        board[i][j] = random.choice(NEW_TILE)
