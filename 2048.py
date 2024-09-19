@@ -67,3 +67,43 @@ def move(board, direction):
             board = rotate_board(board)
     return board
 
+def is_game_over(board):
+    for i in range(SIZE):
+        for j in range(SIZE):
+            if board[i][j] == 0:
+                return False
+            if i < SIZE - 1 and board[i][j] == board[i + 1][j]:
+                return False
+            if j < SIZE - 1 and board[i][j] == board[i][j + 1]:
+                return False
+    return True
+
+def play_game():
+    board = init_board()
+    while True:
+        print_board(board)
+        move_input = input("Enter move (W=Up, S=Down, A=Left, D=Right): ").upper()
+        if move_input not in ['W', 'A', 'S', 'D']:
+            print("Invalid move. Use W, A, S, D keys.")
+            continue
+        if move_input == 'W':
+            direction = 'UP'
+        elif move_input == 'A':
+            direction = 'LEFT'
+        elif move_input == 'S':
+            direction = 'DOWN'
+        elif move_input == 'D':
+            direction = 'RIGHT'
+        
+        new_board = move(board, direction)
+        if new_board != board:
+            board = new_board
+            add_new_tile(board)
+        
+        if is_game_over(board):
+            print_board(board)
+            print("Game Over!")
+            break
+
+if __name__ == "__main__":
+    play_game()
